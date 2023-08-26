@@ -29,6 +29,7 @@ const TopButtons = () => {
                     {city.title}
                 </button>
             ))}
+            <p>1:33</p>
         </div>
     );
 };
