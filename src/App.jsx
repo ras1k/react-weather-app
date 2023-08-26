@@ -36,8 +36,8 @@ function App() {
           <div>
             <TimeAndLocation weather={weather}/>
             <TempAndDetails weather={weather}/>
-            <Forcast title={'Hourly Forcast'} />
-            <Forcast title={'Daily Forcast'} />
+            <Forcast title={'Hourly Forcast'} items={weather.hourly} />
+            <Forcast title={'Daily Forcast'} items={weather.daily} />
           </div>
         )}
       </div>
