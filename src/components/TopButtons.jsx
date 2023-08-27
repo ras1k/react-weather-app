@@ -15,10 +15,14 @@ const TopButtons = ({ setQuery }) => {
         },
         {
             id: 4,
-            title: 'New York'
+            title: 'Berlin'
         },
         {
             id: 5,
+            title: 'Moscow'
+        },
+        {
+            id: 6,
             title: 'Paris'
         },
     ]
