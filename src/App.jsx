@@ -7,6 +7,8 @@ import TempAndDetails from './components/TempAndDetails'
 import TimeAndLocation from './components/TimeAndLocation'
 import TopButtons from './components/TopButtons'
 import getFormattedWeatherData from './services/weatherService'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -16,8 +18,11 @@ function App() {
 
   useEffect(() => {
     const fetchWeather = async () => {
+      const message = query.q ? query.q : 'Current Location.';
+      toast.info('Fetching Weather For ' + message)
       await getFormattedWeatherData({ ...query, units })
         .then((data) => {
+          toast.success(`Successfully fetched weather for ${data.name}, ${data.country}.`)
           setWeather(data);
         });
     };
@@ -25,12 +30,6 @@ function App() {
     fetchWeather();
   }, [query, units]);
 
-  // const formatBg = () => {
-  //   if(!weather) return 'from-cyan-700 to-blue-700';
-  //   const threshhold = units === 'metric' ? 20 : 60;
-  //   if (weather.temp <= threshhold) return 'from-cyan-700 to-blue-700'
-  //   return 'from-yellow-700 to-orange-700'
-  // }
   const formatBackground = () => {
     if (!weather) {
       return "from-cyan-700 to-blue-700";
@@ -46,17 +45,33 @@ function App() {
     <>
       <div className={`mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br h-fit shadow-xl shadow-gray-400 ${formatBackground()}`}>
         <TopButtons setQuery={setQuery} />
-        <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+        <Inputs
+          setQuery={setQuery}
+          units={units}
+          setUnits={setUnits}
+        />
 
         {weather && (
           <div>
             <TimeAndLocation weather={weather} />
             <TempAndDetails weather={weather} />
-            <Forcast title={'Hourly Forcast'} items={weather.hourly} />
-            <Forcast title={'Daily Forcast'} items={weather.daily} />
+            <Forcast
+              title={'Hourly Forcast'}
+              items={weather.hourly}
+            />
+            <Forcast
+              title={'Daily Forcast'}
+              items={weather.daily}
+            />
           </div>
         )}
       </div>
+      <ToastContainer
+        autoClose={5000}
+        theme='colored'
+        position='top-right'
+        newestOnTop={true}
+      />
     </>
   )
 }
