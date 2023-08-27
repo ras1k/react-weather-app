@@ -50,7 +50,7 @@ const TempAndDetails = ({ weather:
                 </div>
             </div>
 
-            <div className="flex flex-row items-center justify-center space-x-1 text-white text-sm py-3">
+            <div className="flex flex-row items-center justify-around space-x-1 text-white text-sm py-3">
                 <UilSun />
                 <p className="font-light text-[16px]">Rise: <span>{formatToLocalTime(sunrise, timezone, 'hh: mm a')}</span></p>
                 <p className="font-light">|</p>
