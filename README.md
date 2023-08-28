@@ -6,4 +6,7 @@
 * React/Vite
 * JavaScript
 * Tailwind CSS
+* Luxon
+* React Unicons
+* React Toastify
 * Openweathermap API
