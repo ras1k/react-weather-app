@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UilSearch, UilLocationPoint } from "@iconscout/react-unicons";
 import { toast } from "react-toastify";
-
+import { isMobile } from 'react-device-detect';
 const Inputs = ({ setQuery, units, setUnits }) => {
 
     const [city, setCity] = useState('');
@@ -19,9 +19,14 @@ const Inputs = ({ setQuery, units, setUnits }) => {
 
     const handleLocation = () => {
         if (navigator.geolocation) {
-            toast.info('Fetching users location')
+            if (!isMobile) {
+                toast.info('Fetching users location')
+            }
             navigator.geolocation.getCurrentPosition((position) => {
-                toast.success('Location fetched')
+                if (!isMobile) {
+                    toast.success('Location fetched')
+                }
+
                 let lat = position.coords.latitude
                 let lon = position.coords.longitude
 
@@ -36,7 +41,7 @@ const Inputs = ({ setQuery, units, setUnits }) => {
 
     const handleUnitsChange = (e) => {
         const selectedUnit = e.currentTarget.name
-        if(units !== selectedUnit) setUnits(selectedUnit)
+        if (units !== selectedUnit) setUnits(selectedUnit)
     }
 
     return (
@@ -45,7 +50,7 @@ const Inputs = ({ setQuery, units, setUnits }) => {
                 <input
                     value={city}
                     onChange={(e) => setCity(e.currentTarget.value)}
-                    onKeyPress={handleKeyPress}
+                    onKeyDown={handleKeyPress}
                     type="text"
                     className="text-xl font-semibold p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase"
                     placeholder="Search for city..."

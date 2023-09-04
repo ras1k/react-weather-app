@@ -9,6 +9,7 @@ import TopButtons from './components/TopButtons'
 import getFormattedWeatherData from './services/weatherService'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { isMobile } from 'react-device-detect';
 
 function App() {
 
@@ -19,10 +20,14 @@ function App() {
   useEffect(() => {
     const fetchWeather = async () => {
       const message = query.q ? query.q : 'Current Location.';
-      toast.info('Fetching Weather For ' + message)
+      if (!isMobile) {
+        toast.info('Fetching Weather For ' + message)
+      }
       await getFormattedWeatherData({ ...query, units })
         .then((data) => {
-          toast.success(`Successfully fetched weather for ${data.name}, ${data.country}.`)
+          if (!isMobile) {
+            toast.success(`Successfully fetched weather for ${data.name}, ${data.country}.`)
+          }
           setWeather(data);
         });
     };
@@ -67,9 +72,9 @@ function App() {
         )}
       </div>
       <ToastContainer
-        autoClose={5000}
+        autoClose={2500}
         theme='colored'
-        position='top-right'
+        position='bottom-right'
         newestOnTop={true}
       />
     </>
