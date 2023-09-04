@@ -8,8 +8,14 @@ const Inputs = ({ setQuery, units, setUnits }) => {
 
     const handleSearch = () => {
         if (city !== '') setQuery({ q: city })
-
+        setCity('');
     }
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleSearch();
+        }
+    };
 
     const handleLocation = () => {
         if (navigator.geolocation) {
@@ -39,6 +45,7 @@ const Inputs = ({ setQuery, units, setUnits }) => {
                 <input
                     value={city}
                     onChange={(e) => setCity(e.currentTarget.value)}
+                    onKeyPress={handleKeyPress}
                     type="text"
                     className="text-xl font-semibold p-2 w-full shadow-xl focus:outline-none capitalize placeholder:lowercase"
                     placeholder="Search for city..."
