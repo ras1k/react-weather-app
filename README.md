@@ -9,4 +9,4 @@
 * Luxon
 * React Unicons
 * React Toastify
-* Openweathermap API
+* OpenWeathermMap API
