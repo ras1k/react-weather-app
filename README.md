@@ -1,4 +1,4 @@
-# Simple Weather App
+# React Weather App
 
 ## Live Site [Link](https://weather-app-ras1k.vercel.app/)
 
