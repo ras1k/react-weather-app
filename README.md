@@ -7,7 +7,10 @@
 ## Features 
 * Fetches accurate weather data from OpenWeratherMapAPI
 * Responsive to units
-* 
+* Working search feature
+* Current location data
+* Mobile responsive
+
 ## Technologies Used:
 * React/Vite
 * JavaScript
